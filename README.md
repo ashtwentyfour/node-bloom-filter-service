@@ -25,6 +25,18 @@ Other environment variables:
 npm install
 ```
 
+- Run unit tests:
+
+```
+npm test
+```
+
+- Linting:
+
+```
+./node_modules/.bin/eslint .
+```
+
 - Build Docker image using:
 
 ```
