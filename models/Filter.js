@@ -34,6 +34,14 @@ class BloomFilter {
     }
     return true;
   }
+
+  size() { // return data structure info
+    const size = {
+        'size': this.arrSize,
+        'hash_count': this.hash_count
+    };
+    return size;
+  }
 }
 
 module.exports.BloomFilter = BloomFilter;
