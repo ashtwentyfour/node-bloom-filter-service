@@ -5,9 +5,14 @@ const config = require('../../config.js');
 const Obj = require('../../models/Filter.js').BloomFilter;
 const bloomFilter = new Obj(config.n_item, config.f_prob);
 
-router.get('/:item', function(req, res) {
+router.get('/:item', function(req, res, next) {
   const item = (req.params.item).toString();
-  const result = bloomFilter.lookup(item);
+  let result;
+  try {
+    result = bloomFilter.lookup(item);
+  } catch (e) {
+    next(e);
+  }
   const body = {};
   if (result) {
     body.message = item + ' is probably present';
@@ -21,9 +26,13 @@ router.get('/:item', function(req, res) {
   return;
 });
 
-router.put('/insert', function(req, res) {
+router.put('/insert', function(req, res, next) {
   const item = (req.body.item).toString();
-  bloomFilter.insert(item);
+  try {
+    bloomFilter.insert(item);
+  } catch (e) {
+    next(e);
+  }
   res.status(201).json({
     'statusCode': 201,
     'body': {
