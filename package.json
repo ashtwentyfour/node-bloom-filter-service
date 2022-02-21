@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "npm install && ./node_modules/.bin/eslint . --fix",
+    "test": "jest --force-exit"
   },
   "author": "Ashwin Menon",
   "license": "ISC",
@@ -22,6 +23,14 @@
   },
   "devDependencies": {
     "eslint": "^8.9.0",
-    "eslint-config-google": "^0.14.0"
+    "eslint-config-google": "^0.14.0",
+    "jest": "^27.5.1",
+    "supertest": "^6.2.2"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ]
   }
 }

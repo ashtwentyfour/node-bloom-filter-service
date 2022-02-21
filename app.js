@@ -75,3 +75,5 @@ const server = app.listen(port, function() {
   const host = server.address().address;
   console.log('App listening at http://%s:%s', host, port);
 });
+
+module.exports = app;
