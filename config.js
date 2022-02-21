@@ -8,10 +8,11 @@ if (process.env.N_ITEMS != null ||
   try {
     assert(process.env.N_ITEMS == null || process.env.N_ITEMS >= 20);
     assert(process.env.F_PROB == null || process.env.F_PROB >= 0.01);
+    assert(process.env.F_PROB == null || process.env.F_PROB <= 1.00);
   } catch (e) {
     if (e instanceof AssertionError) {
       console.error('Error: no. of items must be >= 20 and ' +
-        'false +ve probability >= 0.01');
+        'false +ve probability >= 0.01 and <= 1');
     } else {
       console.error(e);
     }

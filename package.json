@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node app.js",
     "lint": "npm install && ./node_modules/.bin/eslint . --fix",
-    "test": "jest --force-exit"
+    "test": "jest --force-exit",
+    "dev": "nodemon app.js"
   },
   "author": "Ashwin Menon",
   "license": "ISC",
@@ -25,6 +26,7 @@
     "eslint": "^8.9.0",
     "eslint-config-google": "^0.14.0",
     "jest": "^27.5.1",
+    "nodemon": "^2.0.15",
     "supertest": "^6.2.2"
   },
   "jest": {
