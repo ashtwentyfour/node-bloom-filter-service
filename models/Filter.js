@@ -23,7 +23,7 @@ class BloomFilter {
             var hash_value = mmh3.murmur32Sync(item, seed) % this.arr_size;
             this.bit_array[hash_value] = true; 
         }
-        return
+        return;
     }
 
     lookup(item) { // check to see whether item 'probably' exists

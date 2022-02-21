@@ -3,7 +3,7 @@ require('dotenv').config();
 const { AssertionError } = require('assert');
 const assert = require('assert');
 
-if (process.env.N_ITEMS != null || process.env.N_ITEMS != null) {
+if (process.env.N_ITEMS != null || process.env.N_ITEMS != null) { // validate user input parameters
     try {
         assert(process.env.N_ITEMS == null || process.env.N_ITEMS >= 20);
         assert(process.env.F_PROB == null || process.env.F_PROB >= 0.01);
