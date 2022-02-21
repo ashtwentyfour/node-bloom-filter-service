@@ -29,7 +29,7 @@ class BloomFilter {
   lookup(item) { // check to see whether item 'probably' exists
     for (let i = 0; i < this.hash_count; i++) {
       const seed = Number(BigInt.asUintN(32, BigInt(i + 1)));
-      const hashValue = mmh3.murmur32Sync(item, seed) % this.arr_size;
+      const hashValue = mmh3.murmur32Sync(item, seed) % this.arrSize;
       if (!(this.bit_array[hashValue])) return false;
     }
     return true;
