@@ -37,8 +37,8 @@ class BloomFilter {
 
   size() { // return data structure info
     const size = {
-        'size': this.arrSize,
-        'hash_count': this.hash_count
+      'size': this.arrSize,
+      'hash_count': this.hash_count,
     };
     return size;
   }
