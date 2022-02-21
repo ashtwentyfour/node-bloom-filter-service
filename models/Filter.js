@@ -20,7 +20,7 @@ class BloomFilter {
   insert(item) { // add item to filter
     for (let i = 0; i < this.hash_count; i++) {
       const seed = Number(BigInt.asUintN(32, BigInt(i + 1)));
-      const hashValue = mmh3.murmur32Sync(item, seed) % this.arr_size;
+      const hashValue = mmh3.murmur32Sync(item, seed) % this.arrSize;
       this.bit_array[hashValue] = true;
     }
     return;
