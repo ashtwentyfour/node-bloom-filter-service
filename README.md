@@ -16,6 +16,7 @@ Other environment variables:
 
 - `PORT`: Server port (default is `8080`)
 - `NODE_ENV`: Environment name (for Production valus is `production`)
+- `NEW_RELIC_LICENSE_KEY`: New Relic license key
 
 ## Install Dependencies
 
@@ -60,7 +61,7 @@ npm start
 - Deploy container:
 
 ```
-docker run --name bloom-filter -p 8080:8080 node-bloom-filter:latest
+docker run --name bloom-filter --env NEW_RELIC_LICENSE_KEY=xxxx -p 8080:8080 node-bloom-filter:latest
 ```
 
 ## Endpoints
