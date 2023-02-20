@@ -81,3 +81,17 @@ curl --location -g --request PUT 'http://{{host}}:{{port}}/api/insert' \
 ```
 curl --location -g --request GET 'http://{{host}}:{{port}}/api/testitem'
 ```
+
+## Deploy to K8s
+
+- Create new secret for the [New Relic License Key](https://docs.newrelic.com/docs/apis/intro-apis/new-relic-api-keys/)
+
+```
+kubectl create secret generic newrelic-key --from-literal=key=XXXX
+```
+
+- Deploy using [Helm](https://helm.sh/)
+
+```
+cd deployment && helm install node-bloom-filter-service -n bloom-filter --create-namespace .
+```
