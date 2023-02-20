@@ -11,8 +11,8 @@ release: {{ .Release.Name }}
 
 {{- define "node-bloom-filter.n_items" -}}
 {{- if eq .Values.env "production" -}}
-200000
+"200000"
 {{- else -}}
-100000
+"100000"
 {{- end -}}
 {{- end -}}
