@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node app.js",
     "lint": "npm install && ./node_modules/.bin/eslint . --fix",
-    "test": "jest --force-exit",
+    "test": "NEW_RELIC_LICENSE_KEY=testkey jest --force-exit",
     "dev": "nodemon app.js"
   },
   "author": "Ashwin Menon",
