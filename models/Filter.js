@@ -58,6 +58,13 @@ class BloomFilter {
     };
     return size;
   }
+
+  health() { // check Redis connection
+    console.log(`redisClient.isOpen: ${redisClient.isOpen}, 
+    redisClient.isReady: ${redisClient.isReady}`);
+    return redisClient.isOpen && redisClient.isReady;
+  }
+
 }
 
 module.exports.BloomFilter = BloomFilter;

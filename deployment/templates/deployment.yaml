@@ -61,9 +61,9 @@ spec:
           name: http
         livenessProbe:
             httpGet:
-              path: /health/ready
+              path: /api/health/ready
               port: http
         readinessProbe:
             httpGet:
-              path: /health/ready
+              path: /api/health/ready
               port: http

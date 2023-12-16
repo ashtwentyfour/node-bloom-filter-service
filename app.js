@@ -29,16 +29,6 @@ if (!isProd) {
 
 app.use(require('./routes'));
 
-// health check
-app.get('/health/ready', (req, res) => {
-  res.status(200).json({
-    'statusCode': 200,
-    'body': {
-      'status': 'UP',
-    },
-  });
-});
-
 app.use(function(req, res, next) {
   res.status(404).json({
     'statusCode': 404,
