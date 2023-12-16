@@ -13,6 +13,8 @@ RUN npm ci --only=production
 # Bundle app source
 COPY . .
 
+RUN mkdir /ssl-certs
+
 EXPOSE 8080
 
 CMD [ "npm", "start" ]

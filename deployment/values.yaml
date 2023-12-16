@@ -2,8 +2,9 @@ app:
   replicas: 1
   port: 8080
   newrelic:
-    secret: newrelic-key
+    key: bmV3cmVsaWMta2V5Cg==
   configmap: bloom-filter-cm
+  secret: bloom-filter-secret
 
 service:
   port: 8080
@@ -13,3 +14,9 @@ image:
   tag: latest
 
 env: production
+
+redis:
+  port: 6378
+  ca:
+    name: server-ca.pem
+    path: /ssl-certs

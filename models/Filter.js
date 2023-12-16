@@ -23,16 +23,25 @@ class BloomFilter {
       const seed = Number(BigInt.asUintN(32, BigInt(i + 1)));
       const hashValue = mmh3.murmur32Sync(item, seed) % this.arrSize;
       this.bit_array[hashValue] = true;
-      await redisClient.set(hashValue.toString(), 'true');
+      try {
+        await redisClient.set(hashValue.toString(), 'true');
+      } catch (e) {
+        console.error(`redisClient SET command failed: ${e.message}`);
+      }
     }
     return;
   }
 
   async lookup(item) { // check to see whether item 'probably' exists
+    let cacheValue;
     for (let i = 0; i < this.hash_count; i++) {
       const seed = Number(BigInt.asUintN(32, BigInt(i + 1)));
       const hashValue = mmh3.murmur32Sync(item, seed) % this.arrSize;
-      const cacheValue = await redisClient.get(hashValue.toString());
+      try {
+        cacheValue = await redisClient.get(hashValue.toString());
+      } catch (e) {
+        console.error(`redisClient GET command failed: ${e.message}`);
+      }
       if (cacheValue == null) {
         return false;
       } else {
