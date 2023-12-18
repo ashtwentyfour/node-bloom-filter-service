@@ -14,15 +14,24 @@ spec:
       labels:
       {{- include "node-bloom-filter.selectorLabels" . | nindent 8 }}
     spec:
+      volumes:
+      - name: tls-ca
+        secret:
+          secretName: tls-ca
+          defaultMode: 0600
       containers:
       - name: {{ .Chart.Name }}
+        imagePullPolicy: Always
+        volumeMounts:
+          - mountPath: "{{ .Values.redis.ca.path }}"
+            name: tls-ca
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         env:
         - name: NEW_RELIC_LICENSE_KEY
           valueFrom:
             secretKeyRef:
-              name: {{ .Values.app.newrelic.secret }}
-              key: key
+              name: {{ .Values.app.secret }}
+              key: licensekey
         - name: N_ITEMS
           valueFrom:
             configMapKeyRef:
@@ -35,15 +44,26 @@ spec:
               key: f_prob   
         - name: NODE_ENV
           value: {{ .Values.env }}
+        - name: REDIS_PORT
+          value: "{{ .Values.redis.port }}"
+        - name: REDIS_HOST
+          value: {{ .Values.redis.host }}
+        - name: REDIS_AUTH_STRING
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.app.secret }}
+              key: redisauth
+        - name: REDIS_CERT_PATH
+          value: "{{ .Values.redis.ca.path}}/{{ .Values.redis.ca.name }}"
         ports:
         - containerPort: {{ .Values.app.port }}
           protocol: TCP
           name: http
         livenessProbe:
             httpGet:
-              path: /health/ready
+              path: /api/health/ready
               port: http
         readinessProbe:
             httpGet:
-              path: /health/ready
+              path: /api/health/ready
               port: http

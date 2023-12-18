@@ -5,11 +5,34 @@ const config = require('../../config.js');
 const Obj = require('../../models/Filter.js').BloomFilter;
 const bloomFilter = new Obj(config.n_item, config.f_prob);
 
-router.get('/:item', function(req, res, next) {
+router.get('/health/ready', async function(req, res, next) {
+  try {
+    if (bloomFilter.health()) {
+      res.status(200).json({
+        'statusCode': 200,
+        'body': {
+          'status': 'UP',
+        },
+      });
+    } else {
+      res.status(500).json({
+        'statusCode': 500,
+        'body': {
+          'message': 'error connecting to key-value store',
+        },
+      });
+    }
+  } catch (e) {
+    next(e);
+  }
+  return;
+});
+
+router.get('/:item', async function(req, res, next) {
   const item = (req.params.item).toString();
   let result;
   try {
-    result = bloomFilter.lookup(item);
+    result = await bloomFilter.lookup(item);
   } catch (e) {
     next(e);
   }
@@ -26,10 +49,10 @@ router.get('/:item', function(req, res, next) {
   return;
 });
 
-router.put('/insert', function(req, res, next) {
+router.put('/insert', async function(req, res, next) {
   const item = (req.body.item).toString();
   try {
-    bloomFilter.insert(item);
+    await bloomFilter.insert(item);
   } catch (e) {
     next(e);
   }

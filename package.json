@@ -21,6 +21,7 @@
     "morgan": "^1.10.0",
     "murmurhash3": "^0.5.0",
     "newrelic": "^9.8.1",
+    "redis": "^4.6.11",
     "rotating-file-stream": "^3.0.2"
   },
   "devDependencies": {
